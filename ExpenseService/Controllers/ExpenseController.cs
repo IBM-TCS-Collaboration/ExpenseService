@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -23,8 +23,8 @@ namespace ExpenseService.Controllers
             db = new DatabaseContext();
 
         }
-      
-
+        
+        
         // GET api/<ExpenseController>/5
         [ActionName("getExpense")]
         [HttpGet("{UserId}")]
