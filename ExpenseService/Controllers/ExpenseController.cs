@@ -23,12 +23,7 @@ namespace ExpenseService.Controllers
             db = new DatabaseContext();
 
         }
-        // GET: api/<ExpenseController>
-        [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
+      
 
         // GET api/<ExpenseController>/5
         [ActionName("getExpense")]
