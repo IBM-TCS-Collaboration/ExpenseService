@@ -15,7 +15,7 @@ namespace ExpenseService.Database
         public DbSet<documents> Documents { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseMySql(@"server=localhost; port=3306; database=expensedb; user=root; password=123456");
+            optionsBuilder.UseMySql(@"server=server=ts-management-db; port=3306; database=expensedb; user=root; password=password");
         }
     }
 }
