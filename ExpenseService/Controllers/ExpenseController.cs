@@ -31,7 +31,7 @@ namespace ExpenseService.Controllers
         public IEnumerable<expense> Get(int UserId)
         {
             
-            var expense = db.Expenses.FromSql("Select * from expenses where UserId={0}", UserId);
+            var expense = db.Expenses.FromSql("Select * from expensedb.Expenses where UserId={0}", UserId);
             return expense;
         }
 
@@ -40,7 +40,7 @@ namespace ExpenseService.Controllers
         public IEnumerable<expense> GetExpenseDet(int ExpenseId)
         {
 
-            var expense = db.Expenses.FromSql("Select * from expenses where ExpenseId={0}", ExpenseId);
+            var expense = db.Expenses.FromSql("Select * from expensedb.Expenses where ExpenseId={0}", ExpenseId);
             return expense;
         }
 
