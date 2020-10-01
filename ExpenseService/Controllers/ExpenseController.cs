@@ -24,6 +24,16 @@ namespace ExpenseService.Controllers
 
         }
         
+        [ActionName("getExpenseExportReport")]
+        [HttpGet("{StartDate}/{EndDate}")]
+        public IEnumerable<expense> getExpenseExportReport(DateTime StartDate, DateTime EndDate)
+        {
+
+            var expense = db.Expenses.FromSql("Select * from expensedb.Expenses where FromDate between {0} and {1};", StartDate, EndDate);
+            return expense;
+
+        }
+        
         
         // GET api/<ExpenseController>/5
         [ActionName("getExpense")]
