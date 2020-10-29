@@ -24,6 +24,24 @@ namespace ExpenseService.Controllers
 
         }
         
+        [ActionName("ExpenseSubmittedCount")]
+        [HttpGet]
+        public IActionResult GetExpenseSubmittedCount()
+        {
+            var query = from expense in db.Expenses
+                        group expense by 1 into a
+
+                        select new
+                        {
+
+                            ExpenseSubmittedCount = a.Count()
+
+                        };
+
+
+            return Ok(query);
+        }
+        
         [ActionName("getExpenseExportReport")]
         [HttpGet("{StartDate}/{EndDate}")]
         public IEnumerable<expense> getExpenseExportReport(DateTime StartDate, DateTime EndDate)
