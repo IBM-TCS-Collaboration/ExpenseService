@@ -47,7 +47,7 @@ namespace ExpenseService.Controllers
         public IEnumerable<expense> getAllExpenses()
         {
 
-            var expense = db.Expenses.FromSql("Select * from expenses");
+            var expense = db.Expenses.FromSql("Select * from Expenses");
             return expense;
         }
         
