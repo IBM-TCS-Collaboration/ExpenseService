@@ -42,6 +42,26 @@ namespace ExpenseService.Controllers
             return Ok(query);
         }
         
+        [ActionName("ExpenseApproval")]
+        [HttpPut("{ExpenseID}")]
+        public IActionResult ResetPassword([FromBody] expense n)
+        {
+            var existingExpense = db.Expenses.Where(s => s.ExpenseId == n.ExpenseId).FirstOrDefault<expense>();
+
+
+            if (existingExpense != null)
+            {
+                existingExpense.ExpenseStatus = n.ExpenseStatus;
+                db.SaveChanges();
+                
+             }
+            else
+            {
+                return NotFound();
+            }
+            return Ok();
+        }
+        
          [ActionName("getAllExpenses")]
         [HttpGet]
         public IEnumerable<expense> getAllExpenses()
