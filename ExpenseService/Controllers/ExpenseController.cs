@@ -44,7 +44,7 @@ namespace ExpenseService.Controllers
         
         [ActionName("ExpenseApproval")]
         [HttpPut("{ExpenseID}")]
-        public IActionResult ResetPassword([FromBody] expense n)
+        public IActionResult ExpenseApproval([FromBody] expense n)
         {
             var existingExpense = db.Expenses.Where(s => s.ExpenseId == n.ExpenseId).FirstOrDefault<expense>();
 
