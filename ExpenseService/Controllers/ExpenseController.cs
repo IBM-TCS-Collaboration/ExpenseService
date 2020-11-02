@@ -24,6 +24,25 @@ namespace ExpenseService.Controllers
 
         }
         
+         [ActionName("ExpenseSubmittedCount")]
+        [HttpGet("{UserID}")]
+        public IActionResult GetExpenseSubmittedCount(int UserID)
+        {
+            var query = from ex in db.Expenses
+                        where ex.UserID == UserID
+                        group ex by 1 into a
+                        
+                        select new
+                        {
+
+                            ExpenseSubmittedCount = a.Count()
+
+                        };
+
+
+            return Ok(query);
+        }
+        
         [ActionName("ExpenseSubmittedCount")]
         [HttpGet]
         public IActionResult GetExpenseSubmittedCount()
