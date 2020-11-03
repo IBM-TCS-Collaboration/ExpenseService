@@ -42,13 +42,89 @@ namespace ExpenseService.Controllers
 
             return Ok(query);
         }
-        
+             
         [ActionName("ExpenseSubmittedCount")]
         [HttpGet]
         public IActionResult GetExpenseSubmittedCount()
         {
             var query = from expense in db.Expenses
                         group expense by 1 into a
+
+                        select new
+                        {
+
+                            ExpenseSubmittedCount = a.Count()
+
+                        };
+
+
+            return Ok(query);
+        }
+        
+        [ActionName("ExpenseSubmittedApprovedCount")]
+        [HttpGet("{UserID}")]
+        public IActionResult ExpenseSubmittedApprovedCount(int UserID)
+        {
+            var query = from ex in db.Expenses
+                        where ex.UserID == UserID && ex.ExpenseStatus == 1
+                        group ex by 1 into a
+
+                        select new
+                        {
+
+                            ExpenseSubmittedCount = a.Count()
+
+                        };
+
+
+            return Ok(query);
+        }
+
+        [ActionName("ExpenseSubmittedRejectedCount")]
+        [HttpGet("{UserID}")]
+        public IActionResult ExpenseSubmittedRejectedCount(int UserID)
+        {
+            var query = from ex in db.Expenses
+                        where ex.UserID == UserID && ex.ExpenseStatus == 2
+                        group ex by 1 into a
+
+                        select new
+                        {
+
+                            ExpenseSubmittedCount = a.Count()
+
+                        };
+
+
+            return Ok(query);
+        }
+
+        [ActionName("ExpenseSubmittedApprovedCount")]
+        [HttpGet]
+        public IActionResult ExpenseSubmittedApprovedCount()
+        {
+            var query = from ex in db.Expenses
+                        where ex.ExpenseStatus == 1
+                        group ex by 1 into a
+
+                        select new
+                        {
+
+                            ExpenseSubmittedCount = a.Count()
+
+                        };
+
+
+            return Ok(query);
+        }
+
+        [ActionName("ExpenseSubmittedRejectedCount")]
+        [HttpGet]
+        public IActionResult ExpenseSubmittedRejectedCount()
+        {
+            var query = from ex in db.Expenses
+                        where ex.ExpenseStatus == 2
+                        group ex by 1 into a
 
                         select new
                         {
