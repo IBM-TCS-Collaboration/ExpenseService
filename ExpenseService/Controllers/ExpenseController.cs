@@ -231,11 +231,7 @@ namespace ExpenseService.Controllers
             }
         }
 
-        // PUT api/<ExpenseController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
+       
 
         // DELETE api/<ExpenseController>/5
         [ActionName("deleteExpenseDetails")]
