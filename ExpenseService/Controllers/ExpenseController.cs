@@ -24,118 +24,78 @@ namespace ExpenseService.Controllers
 
         }
         
-         [ActionName("ExpenseSubmittedCount")]
-        [HttpGet("{UserID}")]
-        public IActionResult GetExpenseSubmittedCount(int UserID)
-        {
-            var query = from ex in db.Expenses
-                        where ex.UserID == UserID
-                        group ex by 1 into a
-                        
-                        select new
-                        {
-
-                            ExpenseSubmittedCount = a.Count()
-
-                        };
-
-
-            return Ok(query);
-        }
-             
         [ActionName("ExpenseSubmittedCount")]
         [HttpGet]
         public IActionResult GetExpenseSubmittedCount()
         {
-            var query = from expense in db.Expenses
-                        group expense by 1 into a
-
-                        select new
-                        {
-
-                            ExpenseSubmittedCount = a.Count()
-
-                        };
-
-
-            return Ok(query);
+            var ExpenseSubmittedCount = db.Expenses.Count();
+            return Ok(ExpenseSubmittedCount);
         }
-        
+
+        [ActionName("ExpenseSubmittedCount")]
+        [HttpGet("{UserID}")]
+        public IActionResult GetExpenseSubmittedCount(int UserID)
+        {
+
+
+            var ExpenseSubmittedCount = db.Expenses.Where(a => a.UserID == UserID).Count();
+                
+            return Ok(ExpenseSubmittedCount);
+        }
+
         [ActionName("ExpenseSubmittedApprovedCount")]
         [HttpGet("{UserID}")]
         public IActionResult ExpenseSubmittedApprovedCount(int UserID)
         {
-            var query = from ex in db.Expenses
-                        where ex.UserID == UserID && ex.ExpenseStatus == 1
-                        group ex by 1 into a
+            var ExpenseSubmittedApprovedCount = (from e in db.Expenses
+                                         where e.UserID == UserID && e.ExpenseStatus ==1
+                                         select e.UserID).Count();
 
-                        select new
-                        {
+            
 
-                            ExpenseSubmittedCount = a.Count()
+            // string json = JsonConvert.SerializeObject(ExpenseSubmittedApprovedCount, Formatting.Indented);
+            return Ok(ExpenseSubmittedApprovedCount);
 
-                        };
-
-
-            return Ok(query);
         }
 
         [ActionName("ExpenseSubmittedRejectedCount")]
         [HttpGet("{UserID}")]
         public IActionResult ExpenseSubmittedRejectedCount(int UserID)
         {
-            var query = from ex in db.Expenses
-                        where ex.UserID == UserID && ex.ExpenseStatus == 2
-                        group ex by 1 into a
+            var ExpenseSubmittedRejectedCount = (from e in db.Expenses
+                                                 where e.UserID == UserID && e.ExpenseStatus == 2
+                                                 select e.UserID).Count();
 
-                        select new
-                        {
+            return Ok(ExpenseSubmittedRejectedCount);
 
-                            ExpenseSubmittedCount = a.Count()
-
-                        };
-
-
-            return Ok(query);
-        }
+          }
 
         [ActionName("ExpenseSubmittedApprovedCount")]
         [HttpGet]
         public IActionResult ExpenseSubmittedApprovedCount()
         {
-            var query = from ex in db.Expenses
-                        where ex.ExpenseStatus == 1
-                        group ex by 1 into a
+            var ExpenseSubmittedApprovedCount = (from e in db.Expenses
+                                                 where e.ExpenseStatus == 1
+                                                 select e.UserID).Count();
 
-                        select new
-                        {
+            
 
-                            ExpenseSubmittedCount = a.Count()
-
-                        };
-
-
-            return Ok(query);
+            return Ok(ExpenseSubmittedApprovedCount);
         }
 
         [ActionName("ExpenseSubmittedRejectedCount")]
         [HttpGet]
         public IActionResult ExpenseSubmittedRejectedCount()
         {
-            var query = from ex in db.Expenses
-                        where ex.ExpenseStatus == 2
-                        group ex by 1 into a
-
-                        select new
-                        {
-
-                            ExpenseSubmittedCount = a.Count()
-
-                        };
+            var ExpenseSubmittedRejectedCount = (from e in db.Expenses
+                                                 where e.ExpenseStatus == 2
+                                                 select e.UserID).Count();
 
 
-            return Ok(query);
+
+            return Ok(ExpenseSubmittedRejectedCount);
         }
+
         
         [ActionName("ExpenseApproval")]
         [HttpPut("{ExpenseID}")]
