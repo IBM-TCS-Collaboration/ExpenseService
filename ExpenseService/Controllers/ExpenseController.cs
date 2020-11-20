@@ -199,7 +199,7 @@ namespace ExpenseService.Controllers
         public IActionResult Delete(int ExpenseId)
         {
             var expenseToDelete = db.Expenses.SingleOrDefault(x => x.ExpenseId == ExpenseId);
-            var documentToDelete = db.Documents.SingleOrDefault(x => x.ExpenseId == ExpenseId);
+           
 
 
             if (expenseToDelete == null)
@@ -208,7 +208,7 @@ namespace ExpenseService.Controllers
             }
 
             db.Expenses.Remove(expenseToDelete);
-            db.Documents.Remove(documentToDelete);
+           
             db.SaveChanges();
 
             return Ok();
