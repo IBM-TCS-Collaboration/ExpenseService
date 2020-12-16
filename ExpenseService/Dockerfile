@@ -6,10 +6,11 @@ EXPOSE 80
 
 FROM mcr.microsoft.com/dotnet/core/sdk:2.1-stretch AS build
 WORKDIR /src
-COPY ["ExpenseService/ExpenseService.csproj", "ExpenseService/"]
+COPY ["ExpenseService.csproj", "ExpenseService/"]
 RUN dotnet restore "ExpenseService/ExpenseService.csproj"
-COPY . .
+#COPY . .
 WORKDIR "/src/ExpenseService"
+COPY . .
 RUN dotnet build "ExpenseService.csproj" -c Release -o /app/build
 
 FROM build AS publish
